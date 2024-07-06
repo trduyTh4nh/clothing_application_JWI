@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tuan08/app/data/api.dart';
 import 'package:tuan08/app/model/category.dart';
 import 'package:tuan08/app/model/product.dart';
+import 'package:tuan08/utils.dart';
 
 class UpdateProductPage extends StatefulWidget {
   const UpdateProductPage({super.key, required this.productModel});
@@ -26,6 +27,29 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
     String accountID = pref.getString("accountID")!;
     String token = pref.getString("token")!;
     return await APIRepository().getListCategory(accountID, token);
+  }
+
+  void updateProduct(BuildContext context) async {
+    String nameProduct = nameController.text;
+    String descProduct = descController.text;
+    String urlImage = imageController.text;
+    String price = priceController.text;
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String token = pref.getString("token")!;
+    String accountID = pref.getString("accountID")!;
+
+    if (await APIRepository().updateProduct(
+            accountID,
+            widget.productModel.id!,
+            nameProduct,
+            descProduct,
+            urlImage,
+            double.parse(price),
+            widget.productModel.categoryID.toString(),
+            token) ==
+        200) {
+      snackAlert("Chỉnh sửa thành công!", context);
+    }
   }
 
   String urlImage = "";
@@ -55,7 +79,7 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Thêm sản phẩm"),
+        title: Text("Chỉnh sửa sản phẩm"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -150,7 +174,8 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
 
                   List<CategoryModel> result = snapshot.data!;
                   List<String> _names = result.map((e) => e.name).toList();
-                  CategoryModel cate = result.firstWhere((e) => e.id == widget.productModel.categoryID!);
+                  CategoryModel cate = result.firstWhere(
+                      (e) => e.id == widget.productModel.categoryID!);
                   return DropdownButton(
                     onChanged: (value) {
                       print(value);
@@ -196,31 +221,10 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
                       ),
                     ),
                   ),
-                  onPressed: () async {
-                    const sb = SnackBar(content: Text("Thêm thành công"));
-                    int idCate = getIdFromName(test, currentValue);
-                    String nameProduct = nameController.text;
-                    String descProduct = descController.text;
-                    String urlImage = imageController.text;
-                    String price = priceController.text;
-                    SharedPreferences pref =
-                        await SharedPreferences.getInstance();
-                    String token = pref.getString("token")!;
-
-                    try {
-                      await APIRepository().addProduct(token, nameProduct,
-                          descProduct, urlImage, double.parse(price), idCate);
-
-                      ScaffoldMessenger.of(context)
-                          .showSnackBar(sb)
-                          .closed
-                          .then((value) =>
-                              ScaffoldMessenger.of(context).clearSnackBars());
-                    } catch (error) {
-                      print(error);
-                    }
+                  onPressed: () {
+                    updateProduct(context);
                   },
-                  child: const Text("Thêm sản phẩm"))
+                  child: const Text("Chỉnh sửa sản phẩm"))
             ],
           ),
         ),

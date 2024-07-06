@@ -74,7 +74,7 @@ class _DetailState extends State<Detail> {
                               ],
                             ),
                             child: CircleAvatar(
-                              backgroundImage: NetworkImage(user.imageURL!),
+                              backgroundImage: NetworkImage(user.imageURL!, scale: 1),
                               radius: 60,
                             ),
                           ),
@@ -100,7 +100,7 @@ class _DetailState extends State<Detail> {
                               const SizedBox(height: 16),
                             ],
                           )
-                        ],
+                        ], 
                       ),
                     ),
                   ),

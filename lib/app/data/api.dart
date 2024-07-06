@@ -69,6 +69,7 @@ class APIRepository {
       if (res.statusCode == 200) {
         final tokenData = res.data['data']['token'];
         print("ok login");
+        
         return tokenData;
       } else {
         return "login fail";
@@ -108,25 +109,7 @@ class APIRepository {
     }
   }
 
-  Future<List<CategoryModel>> getListCategory(
-      String accountID, String token) async {
-    try {
-      Response res = await api.sendRequest.get('/Category/getList',
-          options: Options(
-            headers: header(token),
-          ),
-          queryParameters: {"accountID": accountID});
-      var data = res.data;
-      List<CategoryModel> lst = [];
-      for (var element in data) {
-        lst.add(CategoryModel.fromJson(jsonEncode(element)));
-      }
-      return lst;
-    } catch (ex) {
-      rethrow;
-    }
-  }
-
+  /// Product
   Future<List<ProductModel>> getListProduct(
       String accountID, String token) async {
     try {
@@ -193,6 +176,150 @@ class APIRepository {
       }
     } catch (eror) {
       print(eror);
+      rethrow;
+    }
+  }
+
+  Future<int?> updateProduct(
+      String accountID,
+      int idProduct,
+      String name,
+      String description,
+      String imageURL,
+      double price,
+      String categoryID,
+      String token) async {
+    try {
+      final body = FormData.fromMap({
+        'id': idProduct,
+        'Name': name,
+        'Description': description,
+        'ImageURL': imageURL,
+        'Price': price,
+        'CategoryID': categoryID,
+        'accountID': accountID
+      });
+
+      Response res = await api.sendRequest.put('/updateProduct',
+          options: Options(
+            headers: header(token),
+          ),
+          data: body);
+
+      if (res.statusCode == 200) {
+        print('Update product success');
+        return res.statusCode;
+      } else {
+        print('Update product fail');
+        return res.statusCode;
+      }
+    } catch (error) {
+      print(error);
+      rethrow;
+    }
+  }
+
+  // category
+
+  Future<List<CategoryModel>> getListCategory(
+      String accountID, String token) async {
+    try {
+      Response res = await api.sendRequest.get('/Category/getList',
+          options: Options(
+            headers: header(token),
+          ),
+          queryParameters: {"accountID": accountID});
+      var data = res.data;
+      List<CategoryModel> lst = [];
+      for (var element in data) {
+        lst.add(CategoryModel.fromJson(jsonEncode(element)));
+      }
+      return lst;
+    } catch (ex) {
+      rethrow;
+    }
+  }
+
+  Future<String> adCategory(String name, String description, String imageUrl,
+      String accountID, String token) async {
+    try {
+      final body = FormData.fromMap({
+        'Name': name,
+        'Description': description,
+        'ImageURL': imageUrl,
+        'AccountID': accountID
+      });
+      Response res = await api.sendRequest.post('/addCategory',
+          options: Options(headers: header(token)), data: body);
+
+      if (res.statusCode == 200) {
+        print("Add category successfully!");
+        return "ok";
+      } else {
+        print("Add category fail!");
+        return "fail";
+      }
+    } catch (error) {
+      print(error);
+      rethrow;
+    }
+  }
+
+  Future<String> removeCategory(
+      int categoryID, String accountID, String token) async {
+    try {
+      final body =
+          FormData.fromMap({'categoryID': categoryID, 'accountID': accountID});
+
+      Response response = await api.sendRequest.delete('/removeCategory',
+          options: Options(headers: header(token)), data: body);
+
+      if (response.statusCode == 200) {
+        print("Delete successfully!");
+        return "ok";
+      } else {
+        print("Delete fail!");
+        return "fail";
+      }
+    } catch (error) {
+      print(error);
+      rethrow;
+    }
+  }
+
+
+  Future<String> updateCategory(
+      String accountID,
+      int id,
+      String name,
+      String description,
+      String imageURL,
+      String token) async {
+    try {
+      print(description);
+      final body = FormData.fromMap({
+        'id': id,
+        'Name': name,
+        'Description': description,
+        'ImageURL': imageURL,
+        'AccountID': accountID
+      });
+
+      Response res = await api.sendRequest.put('/updateCategory',
+          options: Options(
+            headers: header(token),
+          ),
+          data: body);
+
+      if (res.statusCode == 200) {
+        print('Update category successfully!');
+        return "ok";
+      } else {
+        print('Update category fail');
+        return "fail";
+      }
+    } catch (error) {
+      print(error);
       rethrow;
     }
   }

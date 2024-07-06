@@ -53,6 +53,32 @@ class ProductModel {
 
   }
 
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'price': price,
+      'imageURL': imageURL,
+      'description': description,
+      'categoryID': categoryID,
+      'categoryName': categoryName,
+      'idProductAPI': id
+
+    };
+  }
+
+    factory ProductModel.fromMap(Map<String, dynamic> map) {
+    return ProductModel(
+      id: map['id']?.toInt() ?? 0,
+      name: map['name'] ?? '',
+      price: map['price'] ?? '',
+      imageURL: map['imageURL'] ?? '',
+      description: map['descriptionc'] ?? '',
+      categoryID: map['categoryID'] ?? '',
+      categoryName: map['categoryName'] ?? '',
+    );
+  }
+
 
 
 

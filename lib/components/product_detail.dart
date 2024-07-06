@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tuan08/app/model/product.dart';
+import 'package:tuan08/helper/db_helper.dart';
 import 'package:tuan08/utils.dart';
 
 class ProductDetail extends StatefulWidget {
@@ -12,14 +13,37 @@ class ProductDetail extends StatefulWidget {
 
 class _ProductDetailState extends State<ProductDetail> {
   bool checkfavorite = false;
+  List<ProductModel> _list = [];
+  Future<List<ProductModel>> _getProduct() async {
+    return await _databaseHelper.products();
+  }
+
+  Future<void> _initializeProducts() async {
+    _list = await _getProduct();
+    for (var element in _list) {
+      if (element.id == widget.productModel.id) {
+        setState(() {
+          checkfavorite = element.id == widget.productModel.id;
+        });
+      }
+    }
+  }
 
   @override
   void initState() {
     super.initState();
-    checkfavorite = false;
+    _getProduct();
+    _initializeProducts();
+    // checkfavorite = false;
   }
 
   List<String> _sizes = ["S", "M", "L", "XL", "XXL"];
+  DatabaseHelper _databaseHelper = DatabaseHelper();
+  Future<void> _onSaveFavorite() async {
+    ProductModel productModel = widget.productModel;
+    await _databaseHelper.insertProduct(productModel);
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +54,7 @@ class _ProductDetailState extends State<ProductDetail> {
           IconButton(
               onPressed: () {
                 checkfavorite = !checkfavorite;
+                _onSaveFavorite();
                 setState(() {});
               },
               icon: checkfavorite
@@ -80,7 +105,14 @@ class _ProductDetailState extends State<ProductDetail> {
                           ],
                         ),
                       ),
-                      Text(formatMoney(widget.productModel.price!))
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      Text(
+                        formatMoney(widget.productModel.price!),
+                        style: const TextStyle(
+                            fontSize: 22, fontWeight: FontWeight.bold),
+                      )
                     ],
                   ),
                   const SizedBox(
@@ -123,7 +155,7 @@ class _ProductDetailState extends State<ProductDetail> {
                     width: 300,
                     child: FilledButton(
                         style: ButtonStyle(
-                          shape: MaterialStateProperty.all(
+                          shape: WidgetStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
                                   8), // Set the border radius to zero

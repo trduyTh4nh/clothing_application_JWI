@@ -35,6 +35,8 @@ class _ProductManagementState extends State<ProductManagement> {
   void initState() {
     super.initState();
     getProductsAll();
+    setState(() {
+    });
   }
 
   showAlertDialog(BuildContext context, ProductModel product) async {
@@ -65,7 +67,7 @@ class _ProductManagementState extends State<ProductManagement> {
           print("Bắt lỗi: ${error}");
         }
 
-        Navigator.of(context).pop(); // Close the dialog
+        Navigator.of(context).pop(); 
       },
     );
 
@@ -91,104 +93,104 @@ class _ProductManagementState extends State<ProductManagement> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Quản lý sản phẩm"),
+          title: const Text("Quản lý sản phẩm"),
           actions: [
             IconButton(onPressed: () {}, icon: const Icon(Icons.delete))
           ],
         ),
-        body: Expanded(
-          child: CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: FutureBuilder<List<ProductModel>>(
-                    future: getListProduct(),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(child: CircularProgressIndicator());
-                      }
-                      if (snapshot.hasError) {
-                        return Center(child: Text('Error: ${snapshot.error}'));
-                      }
-                      if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                        return Center(child: Text('Không có sản phẩm nào'));
-                      }
-
-                      List<ProductModel> result = snapshot.data!;
-
-                      return ListView.separated(
-                        separatorBuilder: (context, index) => const Divider(),
-                        physics:
-                            const NeverScrollableScrollPhysics(), 
-                        shrinkWrap: true, 
-                        itemCount: result.length,
-                        itemBuilder: (context, index) {
-                          ProductModel product = result[index];
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      width: 50,
-                                      height: 50,
-                                      child: Image.network(product.imageURL!),
+        body: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: FutureBuilder<List<ProductModel>>(
+                  future: getListProduct(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                    if (snapshot.hasError) {
+                      return Center(child: Text('Error: ${snapshot.error}'));
+                    }
+                    if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                      return Center(child: Text('Không có sản phẩm nào'));
+                    }
+        
+                    List<ProductModel> result = snapshot.data!;
+        
+                    return ListView.separated(
+                      separatorBuilder: (context, index) => const Divider(),
+                      physics:
+                          const NeverScrollableScrollPhysics(), 
+                      shrinkWrap: true, 
+                      itemCount: result.length,
+                      itemBuilder: (context, index) {
+                        ProductModel product = result[index];
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
                                     ),
-                                    const SizedBox(width: 6),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(product.name!),
-                                        const SizedBox(height: 4),
-                                        Text(formatMoney(product.price!)),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    IconButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  UpdateProductPage(
-                                                      productModel: product),
-                                            ));
-                                      },
-                                      icon: const Icon(Icons.edit),
-                                    ),
-                                    const SizedBox(width: 8),
-                                    IconButton(
-                                      onPressed: () {
-                                        showAlertDialog(context, product);
-                                      },
-                                      icon: const Icon(
-                                          Icons.delete_forever_outlined),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      );
-                    },
-                  ),
+                                    width: 50,
+                                    height: 50,
+                                    child: Image.network(product.imageURL!),
+                                  ),
+                                  const SizedBox(width: 6),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(product.name!),
+                                      const SizedBox(height: 4),
+                                      Text(formatMoney(product.price!)),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                UpdateProductPage(
+                                                    productModel: product),
+                                          ));
+                                    },
+                                    icon: const Icon(Icons.edit),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  IconButton(
+                                    onPressed: () {
+                                      showAlertDialog(context, product);
+                                    },
+                                    icon: const Icon(
+                                        Icons.delete_forever_outlined, color: Colors.redAccent,),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  },
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
         floatingActionButton: FilledButton(
+          style: ButtonStyle(
+          ),
           onPressed: () {
             Navigator.push(
                 context,

@@ -58,7 +58,7 @@ class _MainpageState extends State<Mainpage> {
               label: Text("1"),
               child: IconButton(
                 onPressed: () {},
-                icon: const Icon(Icons.shopping_bag),
+                icon: const Icon(Icons.shopping_bag_outlined),
               ),
             ),
             IconButton(

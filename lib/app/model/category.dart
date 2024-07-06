@@ -29,14 +29,14 @@ class CategoryModel {
       {this.id, required this.name, required this.desc, this.imageURL});
 
   Map<String, dynamic> toMap() {
-    return {'id': id, 'name': name, 'desc': desc, 'imageURL': imageURL};
+    return {'id': id, 'name': name, 'description': desc, 'imageURL': imageURL};
   }
 
   factory CategoryModel.fromMap(Map<String, dynamic> map) {
     return CategoryModel(
         id: map['id']?.toInt() ?? 0,
         name: map['name'] ?? '',
-        desc: map['desc'] ?? '',
+        desc: map['description'] ?? '',
         imageURL: map['imageURL'] ?? '');
   }
 
@@ -49,5 +49,5 @@ class CategoryModel {
   // each breed when using the print statement.
   @override
   String toString() =>
-      'Category(id: $id, name: $name, desc: $desc, imageURL: $imageURL)';
+      'Category(id: $id, name: $name, description: $desc, imageURL: $imageURL)';
 }

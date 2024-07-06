@@ -77,8 +77,13 @@ class _HomePageState extends State<HomePage> {
           slivers: [
             const SliverToBoxAdapter(
               child: Text(
-                "Dám khác biệt!?",
+                "Dám khác biệt?",
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+            ),
+            const SliverToBoxAdapter(
+              child: SizedBox(
+                height: 16,
               ),
             ),
             SliverToBoxAdapter(
@@ -108,6 +113,11 @@ class _HomePageState extends State<HomePage> {
                     // Handle page change if needed
                   },
                 ),
+              ),
+            ),
+            const SliverToBoxAdapter(
+              child: SizedBox(
+                height: 16,
               ),
             ),
             const SliverToBoxAdapter(
@@ -192,8 +202,8 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
-            SliverToBoxAdapter(
-              child: const SizedBox(
+            const SliverToBoxAdapter(
+              child: SizedBox(
                 height: 16,
               ),
             ),
@@ -287,17 +297,10 @@ class _HomePageState extends State<HomePage> {
                                                 checkfavorite = !checkfavorite;
                                                 setState(() {});
                                               },
-                                              icon: checkfavorite
-                                                  ? const Icon(
-                                                      Icons.favorite,
-                                                      color: Colors.pinkAccent,
-                                                    )
-                                                  : const Icon(
-                                                      Icons
-                                                          .favorite_border_outlined,
-                                                      color: Color.fromARGB(
-                                                          255, 0, 0, 0),
-                                                    ))
+                                              icon: const Icon(
+                                                Icons.discount,
+                                                color: Color.fromARGB(255, 197, 178, 8),
+                                              ))
                                         ],
                                       ),
                                     )
