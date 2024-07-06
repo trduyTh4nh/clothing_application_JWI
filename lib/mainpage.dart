@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tuan08/app/model/user.dart';
 import 'package:tuan08/app/page/detail.dart';
 import 'package:tuan08/app/route/page1.dart';
@@ -9,6 +10,7 @@ import 'package:tuan08/components/cart.dart';
 import 'package:tuan08/components/favorite.dart';
 import 'package:tuan08/components/hisotry.dart';
 import 'package:tuan08/components/home.dart';
+import 'package:tuan08/provider/add_provider.dart';
 import 'app/data/sharepre.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -50,16 +52,22 @@ class _MainpageState extends State<Mainpage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.black),
+          iconTheme: const IconThemeData(color: Colors.black),
           backgroundColor: Colors.white,
           title: Image.asset('assets/images/just-wear-it-favicon-black.png'),
           actions: [
-            Badge(
-              label: Text("1"),
-              child: IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.shopping_bag_outlined),
-              ),
+            Consumer<ProductProvider>(
+              builder: (context, value, child) {
+                return Badge(
+                  label: Text(value.lst.length.toString()),
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder:(context) => const CartPage(),));
+                    },
+                    icon: const Icon(Icons.shopping_bag_outlined),
+                  ),
+                );
+              },
             ),
             IconButton(
                 onPressed: () {

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:tuan08/app/model/category.dart';
+import 'package:tuan08/app/model/order.dart';
 import 'package:tuan08/app/model/product.dart';
 import 'package:tuan08/app/model/register.dart';
 import 'package:tuan08/app/model/user.dart';
@@ -69,7 +70,7 @@ class APIRepository {
       if (res.statusCode == 200) {
         final tokenData = res.data['data']['token'];
         print("ok login");
-        
+
         return tokenData;
       } else {
         return "login fail";
@@ -287,14 +288,8 @@ class APIRepository {
     }
   }
 
-
-  Future<String> updateCategory(
-      String accountID,
-      int id,
-      String name,
-      String description,
-      String imageURL,
-      String token) async {
+  Future<String> updateCategory(String accountID, int id, String name,
+      String description, String imageURL, String token) async {
     try {
       print(description);
       final body = FormData.fromMap({
@@ -316,6 +311,32 @@ class APIRepository {
         return "ok";
       } else {
         print('Update category fail');
+        return "fail";
+      }
+    } catch (error) {
+      print(error);
+      rethrow;
+    }
+  }
+
+  // payment
+
+  Future<String> paymentCart(List<Order> _orders, String token) async {
+    try {
+      for (var element in _orders) {
+        print(element.count);
+      }
+      List<Map<String, dynamic>> orderMap =
+          _orders.map((e) => e.toMap()).toList();
+      final body = jsonEncode(orderMap);
+      print("body: ${body}");
+      Response res = await api.sendRequest.post('/Order/addBill',
+          options: Options(headers: header(token)), data: body);
+
+      if (res.statusCode == 200) {
+        print("Payment successfully!");
+        return "ok";
+      } else {
         return "fail";
       }
     } catch (error) {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tuan08/app/model/product.dart';
 import 'package:tuan08/helper/db_helper.dart';
+import 'package:tuan08/provider/add_provider.dart';
 import 'package:tuan08/utils.dart';
 
 class ProductDetail extends StatefulWidget {
@@ -151,21 +153,30 @@ class _ProductDetailState extends State<ProductDetail> {
                     height: 24,
                   ),
                   SizedBox(
-                    height: 80,
-                    width: 300,
-                    child: FilledButton(
-                        style: ButtonStyle(
-                          shape: WidgetStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  8), // Set the border radius to zero
+                    height: 50,
+                    width: 250,
+                    child: Consumer<ProductProvider>(
+                      builder: (context, value, child) {
+                        return FilledButton(
+                            style: ButtonStyle(
+                              shape: WidgetStateProperty.all(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      8), // Set the border radius to zero
+                                ),
+                              ),
+                              backgroundColor: WidgetStateProperty.all<Color>(
+                                  Colors.black), // Change to your desired color
                             ),
-                          ),
-                          backgroundColor: WidgetStateProperty.all<Color>(
-                              Colors.black), // Change to your desired color
-                        ),
-                        onPressed: () {},
-                        child: Text("THÊM VÀO GIỎ HÀNG")),
+                            onPressed: () {
+                             
+                              value.add(widget.productModel);
+                          
+                              snackAlert("Thêm vào giỏ hàng thành công", context);
+                            },
+                            child: Text("THÊM VÀO GIỎ HÀNG"));
+                      },
+                    ),
                   ),
                   const SizedBox(
                     height: 18,
