@@ -58,7 +58,7 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
   void initState() {
     super.initState();
     nameController.text = widget.productModel.name!;
-    descController.text = widget.productModel.description!;
+    descController.text = widget.productModel.description == null ? "" : widget.productModel.description!;
     imageController.text = widget.productModel.imageURL!;
     priceController.text = widget.productModel.price.toString();
   }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:tuan08/app/model/user.dart';
 import 'package:tuan08/app/page/detail.dart';
@@ -10,6 +11,7 @@ import 'package:tuan08/components/cart.dart';
 import 'package:tuan08/components/favorite.dart';
 import 'package:tuan08/components/hisotry.dart';
 import 'package:tuan08/components/home.dart';
+import 'package:tuan08/components/management.dart';
 import 'package:tuan08/provider/add_provider.dart';
 import 'app/data/sharepre.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -62,7 +64,11 @@ class _MainpageState extends State<Mainpage> {
                   label: Text(value.lst.length.toString()),
                   child: IconButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder:(context) => const CartPage(),));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const CartPage(),
+                          ));
                     },
                     icon: const Icon(Icons.shopping_bag_outlined),
                   ),
@@ -70,13 +76,20 @@ class _MainpageState extends State<Mainpage> {
               },
             ),
             IconButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const FavoritePage()));
-                },
-                icon: const Icon(Icons.favorite, color: Colors.pinkAccent,))
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const FavoritePage(),
+                  ),
+                );
+              },
+              icon: Lottie.asset(
+                'assets/images/heart_like.json', // Make sure the image is added to your assets
+                width: 50,
+                height: 50,
+              ),
+            )
           ]),
       drawer: Drawer(
         child: IconTheme(
@@ -139,23 +152,25 @@ class _MainpageState extends State<Mainpage> {
               ),
               ListTile(
                 leading: const Icon(Icons.shopping_cart),
-                title: const Text('GIỎ hàng'),
+                title: const Text('Giỏ hàng'),
                 onTap: () {
                   Navigator.pop(context);
                   _selectedIndex = 2;
                   setState(() {});
                 },
               ),
-              // ListTile(
-              //   leading: const Icon(Icons.pages),
-              //   title: const Text('Page1'),
-              //   onTap: () {
-              //     Navigator.pop(context);
-              //     _selectedIndex = 0;
-              //     Navigator.push(context,
-              //         MaterialPageRoute(builder: (context) => const Page1()));
-              //   },
-              // ),
+              ListTile(
+                leading: const Icon(Icons.admin_panel_settings),
+                title: const Text('Chế độ quản trị viên'),
+                onTap: () {
+                  Navigator.pop(context);
+                  _selectedIndex = 0;
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ManagementPage()));
+                },
+              ),
               // ListTile(
               //   leading: const Icon(Icons.pages),
               //   title: const Text('Page2'),
@@ -173,7 +188,7 @@ class _MainpageState extends State<Mainpage> {
                   Navigator.pop(context);
                   _selectedIndex = 0;
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Page3()));
+                      MaterialPageRoute(builder: (context) => const Detail()));
                 },
               ),
               const Divider(
@@ -182,8 +197,8 @@ class _MainpageState extends State<Mainpage> {
               user.accountId == ''
                   ? const SizedBox()
                   : ListTile(
-                      leading: const Icon(Icons.exit_to_app),
-                      title: const Text('Logout'),
+                      leading: const Icon(Icons.logout_rounded),
+                      title: const Text('Đăng xuất'),
                       onTap: () {
                         logOut(context);
                       },

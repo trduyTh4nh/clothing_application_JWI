@@ -106,7 +106,7 @@ class _CategoryManagementState extends State<CategoryManagement> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Quản lý sản phẩm"),
+          title: const Text("Quản lý loại sản phẩm"),
           actions: [
             IconButton(onPressed: () {}, icon: const Icon(Icons.delete))
           ],

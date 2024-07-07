@@ -1,3 +1,4 @@
+import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tuan08/app/data/api.dart';
 import 'package:tuan08/mainpage.dart';
@@ -105,7 +106,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: const Text("Register"),
                       )),
                     ],
-                  )
+                  ),
+                  const SizedBox(height: 16),
+                  Container(
+                    child: Lottie.asset('assets/images/Store.json'),
+                  ),
+                  const Text("JUST WEAR IT", style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 32
+                  ),),
                 ],
               ),
             ),

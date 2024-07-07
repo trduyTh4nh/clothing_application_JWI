@@ -35,7 +35,6 @@ class _HisotryPageState extends State<HisotryPage> {
       appBar: AppBar(
         title: const Text("Lịch sử mua hàng"),
         automaticallyImplyLeading: false,
-
       ),
       body: FutureBuilder<List<Payment>>(
         future: getHistoryPayments(),
@@ -72,37 +71,70 @@ class _HisotryPageState extends State<HisotryPage> {
                                 ),
                               ),
                             ]),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
-                              child: Text(
-                                "Hóa đơn: ${payment.id}",
-                                style: const TextStyle(color: Colors.green),
-                              ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  
+                                  child: Container(
+                                    width: 320,
+                                    child: Text(
+                                      "Hóa đơn: ${payment.id}",
+                                      style: const TextStyle(color: Colors.green),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 0,
+                                ),
+                                Text(
+                                  "Tên khách hàng: ${payment.fullName}",
+                                  style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(
+                                  height: 0,
+                                ),
+                                Text("Ngày tạo: ${payment.dateCreated}",
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold)),
+                                const SizedBox(
+                                  height: 0,
+                                ),
+                                Text(
+                                    "Tổng hóa đơn: ${formatMoney(payment.total!)}",
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color.fromARGB(255, 209, 31, 4)))
+                              ],
                             ),
-                            const SizedBox(
-                              height: 0,
-                            ),
-                            Text(
-                              "Tên khách hàng: ${payment.fullName}",
-                              style: const TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
-                            ),
-                            const SizedBox(
-                              height: 0,
-                            ),
-                            Text("Ngày tạo: ${payment.dateCreated}",
-                                style: const TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold)),
-                            const SizedBox(
-                              height: 0,
-                            ),
-                            Text("Tổng hóa đơn: ${formatMoney(payment.total!)}",
-                                style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromARGB(255, 209, 31, 4)))
+                            IconButton(
+                                onPressed: () async {
+                                  SharedPreferences pre =
+                                      await SharedPreferences.getInstance();
+                                  String token = pre.getString("token")!;
+                                  String result = await APIRepository()
+                                      .deletePayment(payment.id!, token);
+                                  if (result == "ok") {
+                                    snackAlert(
+                                        "Remove success order: ${payment.id}",
+                                        context);
+                                        setState(() {
+                                          
+                                        });
+                                  } else {
+                                    snackAlert(
+                                        "Remove fail order: ${payment.id}",
+                                        context);
+                                  }
+                                },
+                                icon: const Icon(Icons.delete))
                           ],
                         ),
                       );

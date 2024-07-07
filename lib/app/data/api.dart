@@ -219,7 +219,6 @@ class APIRepository {
       rethrow;
     }
   }
-  
 
   // category
   Future<List<CategoryModel>> getListCategory(
@@ -364,6 +363,25 @@ class APIRepository {
       }
     } catch (error) {
       print(error);
+      rethrow;
+    }
+  }
+
+  Future<String> deletePayment(String idPayment, String token) async {
+    try {
+      // final body = FormData.fromMap({'billID': idPayment});
+      // print("Debug: ${idPayment}");
+      Response res = await api.sendRequest.delete('/Bill/remove',
+          options: Options(headers: header(token)), queryParameters: {'billID': idPayment});
+
+      if (res.statusCode == 200) {
+        print("Remove successfully!");
+        return "ok";
+      } else {
+        return "fail";
+      }
+    } catch (err) {
+      print(err);
       rethrow;
     }
   }

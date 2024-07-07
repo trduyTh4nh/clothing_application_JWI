@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tuan08/app/data/api.dart';
@@ -148,7 +149,6 @@ class _HomePageState extends State<HomePage> {
                   }
 
                   List<CategoryModel> _listCateModel = snapshot.data!;
-
                   return Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 0, vertical: 4),
@@ -269,8 +269,11 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 child: Column(
                                   children: [
-                                    Image.network(
-                                        _listProduct[index].imageURL!),
+                                    Hero(
+                                      tag: _listProduct[index].id!,
+                                      child: Image.network(
+                                          _listProduct[index].imageURL!),
+                                    ),
                                     const SizedBox(
                                       height: 8,
                                     ),
@@ -324,6 +327,19 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
+             SliverToBoxAdapter(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Thời trang cuộc sống",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                   const SizedBox(height: 16,),
+                ],
+              ),
+            ),
+            
             SliverToBoxAdapter(
               child: Footer(),
             )

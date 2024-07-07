@@ -42,30 +42,15 @@ class _UpdateCategoryPageState extends State<UpdateCategoryPage> {
     }
   }
 
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  //   setState(() {
-      
-  //   });
-  // }
-
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  //   setState(() {
-      
-  //   });
-  // }
-
   String urlImage = "";
 
   @override
   void initState() {
     super.initState();
+    CategoryModel cate = widget.cateModel!;
     nameController.text = widget.cateModel.name;
-    descController.text = widget.cateModel.desc;
-    imageController.text = widget.cateModel.imageURL!;
+    descController.text = cate.desc == "" ? "" : cate.desc;
+    imageController.text = widget.cateModel.imageURL!; 
   }
 
   String currentValue = "";

@@ -107,13 +107,13 @@ class _ProductManagementState extends State<ProductManagement> {
                   future: getListProduct(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(child: CircularProgressIndicator());
+                      return const Center(child: CircularProgressIndicator());
                     }
                     if (snapshot.hasError) {
                       return Center(child: Text('Error: ${snapshot.error}'));
                     }
                     if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                      return Center(child: Text('Không có sản phẩm nào'));
+                      return const Center(child: Text('Không có sản phẩm nào'));
                     }
         
                     List<ProductModel> result = snapshot.data!;
@@ -146,7 +146,10 @@ class _ProductManagementState extends State<ProductManagement> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(product.name!),
+                                      Container(
+                                        child: Text(product.name!),
+                                        width: 200,
+                                        ),
                                       const SizedBox(height: 4),
                                       Text(formatMoney(product.price!)),
                                     ],

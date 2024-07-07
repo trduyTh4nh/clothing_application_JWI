@@ -72,7 +72,10 @@ class _FavoritePageState extends State<FavoritePage> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(product.name!),
+                                      Container(
+                                        child: Text(product.name!),
+                                        width: 250,
+                                        ),
                                       const SizedBox(height: 4),
                                       Text(formatMoney(product.price!)),
                                     ],

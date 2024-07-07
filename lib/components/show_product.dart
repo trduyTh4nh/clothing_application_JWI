@@ -80,7 +80,7 @@ class _ShowProductPageState extends State<ShowProductPage> {
           return Padding(
               padding: const EdgeInsets.only(bottom: 40, top: 8),
               child: SizedBox(
-                height: 500,
+                height: MediaQuery.of(context).size.height,
                 child: MasonryGridView.builder(
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10,

@@ -11,15 +11,17 @@ class ProductProvider with ChangeNotifier {
   }
 
   del(int index) {
+    print("debug: ${index}");
     if (lst.length == 1) {
       delAll();
     } else {
-      lst.removeAt(index);
       if (price > 0) {
         print(lst.elementAt(index).price);
         price -= lst.elementAt(index).price!;
       }
+      lst.removeAt(index);
     }
+
     notifyListeners();
   }
 
@@ -28,6 +30,4 @@ class ProductProvider with ChangeNotifier {
     price = 0;
     notifyListeners();
   }
-
-  
 }

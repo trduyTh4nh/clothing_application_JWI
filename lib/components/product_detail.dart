@@ -78,7 +78,9 @@ class _ProductDetailState extends State<ProductDetail> {
               children: [
                 IconButton(onPressed: () {}, icon: const Icon(Icons.favorite)),
                 Container(
-                  child: Image.network(widget.productModel.imageURL!),
+                  child: Hero(
+                      tag: widget.productModel.id!,
+                      child: Image.network(widget.productModel.imageURL!)),
                 ),
               ],
             ),
@@ -169,12 +171,12 @@ class _ProductDetailState extends State<ProductDetail> {
                                   Colors.black), // Change to your desired color
                             ),
                             onPressed: () {
-                             
                               value.add(widget.productModel);
-                          
-                              snackAlert("Thêm vào giỏ hàng thành công", context);
+
+                              snackAlert(
+                                  "Thêm vào giỏ hàng thành công", context);
                             },
-                            child: Text("THÊM VÀO GIỎ HÀNG"));
+                            child: const Text("THÊM VÀO GIỎ HÀNG"));
                       },
                     ),
                   ),
@@ -182,8 +184,10 @@ class _ProductDetailState extends State<ProductDetail> {
                     height: 18,
                   ),
                   Text(
-                    widget.productModel.description!,
-                    style: TextStyle(fontSize: 18, color: Colors.grey),
+                    widget.productModel.description != null
+                        ? widget.productModel.description!
+                        : "",
+                    style: const TextStyle(fontSize: 18, color: Colors.grey),
                   )
                 ],
               ),
