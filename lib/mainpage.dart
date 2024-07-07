@@ -130,7 +130,7 @@ class _MainpageState extends State<Mainpage> {
               ),
               ListTile(
                 leading: const Icon(Icons.contact_mail),
-                title: const Text('History'),
+                title: const Text('Lịch sử mua hàng'),
                 onTap: () {
                   Navigator.pop(context);
                   _selectedIndex = 1;
@@ -138,37 +138,37 @@ class _MainpageState extends State<Mainpage> {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.contact_mail),
-                title: const Text('Cart'),
+                leading: const Icon(Icons.shopping_cart),
+                title: const Text('GIỎ hàng'),
                 onTap: () {
                   Navigator.pop(context);
                   _selectedIndex = 2;
                   setState(() {});
                 },
               ),
+              // ListTile(
+              //   leading: const Icon(Icons.pages),
+              //   title: const Text('Page1'),
+              //   onTap: () {
+              //     Navigator.pop(context);
+              //     _selectedIndex = 0;
+              //     Navigator.push(context,
+              //         MaterialPageRoute(builder: (context) => const Page1()));
+              //   },
+              // ),
+              // ListTile(
+              //   leading: const Icon(Icons.pages),
+              //   title: const Text('Page2'),
+              //   onTap: () {
+              //     Navigator.pop(context);
+              //     _selectedIndex = 0;
+              //     Navigator.push(context,
+              //         MaterialPageRoute(builder: (context) => const Page2()));
+              //   },
+              // ),
               ListTile(
-                leading: const Icon(Icons.pages),
-                title: const Text('Page1'),
-                onTap: () {
-                  Navigator.pop(context);
-                  _selectedIndex = 0;
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Page1()));
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.pages),
-                title: const Text('Page2'),
-                onTap: () {
-                  Navigator.pop(context);
-                  _selectedIndex = 0;
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Page2()));
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.pages),
-                title: const Text('Page3'),
+                leading: const Icon(Icons.person),
+                title: const Text('Thông tin người dùng'),
                 onTap: () {
                   Navigator.pop(context);
                   _selectedIndex = 0;

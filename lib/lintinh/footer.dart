@@ -10,7 +10,7 @@ class Footer extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
+          const Text(
             'Follow Us',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
@@ -31,13 +31,13 @@ class Footer extends StatelessWidget {
                 },
               ),
               IconButton(
-                icon: const Icon(Icons.social_distance),
+                icon: const Icon(Icons.linked_camera),
                 onPressed: () {
                   // Add your Twitter link here
                 },
               ),
               IconButton(
-                icon: const Icon(Icons.youtube_searched_for_rounded),
+                icon: const Icon(Icons.domain),
                 onPressed: () {
                   // Add your YouTube link here
                 },

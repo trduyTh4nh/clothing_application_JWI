@@ -82,7 +82,7 @@ class _DetailState extends State<Detail> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const SizedBox(height: 16),
-                              Text("ID: ${user.idNumber}",
+                              Text("Number: ${user.idNumber}",
                                   style: mystyle),
                               Text("Tên đầy đủ: ${user.fullName}",
                                   style: mystyle),
