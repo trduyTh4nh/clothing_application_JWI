@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:tuan08/app/model/category.dart';
 import 'package:tuan08/app/model/order.dart';
+import 'package:tuan08/app/model/payment.dart';
 import 'package:tuan08/app/model/product.dart';
 import 'package:tuan08/app/model/register.dart';
 import 'package:tuan08/app/model/user.dart';
@@ -206,7 +207,6 @@ class APIRepository {
             headers: header(token),
           ),
           data: body);
-
       if (res.statusCode == 200) {
         print('Update product success');
         return res.statusCode;
@@ -219,9 +219,9 @@ class APIRepository {
       rethrow;
     }
   }
+  
 
   // category
-
   Future<List<CategoryModel>> getListCategory(
       String accountID, String token) async {
     try {
@@ -338,6 +338,29 @@ class APIRepository {
         return "ok";
       } else {
         return "fail";
+      }
+    } catch (error) {
+      print(error);
+      rethrow;
+    }
+  }
+
+  Future<List<Payment>> getHistoryPayment(String token) async {
+    try {
+      Response res = await api.sendRequest.get(
+        "/Bill/getHistory",
+        options: Options(headers: header(token)),
+      );
+      List<Payment> payments = [];
+
+      if (res.statusCode == 200) {
+        var data = res.data;
+        for (var element in data) {
+          payments.add(Payment.fromJson(jsonEncode(element)));
+        }
+        return payments;
+      } else {
+        return payments;
       }
     } catch (error) {
       print(error);

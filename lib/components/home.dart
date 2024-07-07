@@ -9,6 +9,7 @@ import 'package:tuan08/app/data/api.dart';
 import 'package:tuan08/app/model/category.dart';
 import 'package:tuan08/app/model/product.dart';
 import 'package:tuan08/components/product_detail.dart';
+import 'package:tuan08/components/show_product.dart';
 import 'package:tuan08/lintinh/footer.dart';
 import 'package:tuan08/utils.dart';
 
@@ -158,7 +159,14 @@ class _HomePageState extends State<HomePage> {
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           return InkWell(
-                            onTap: () => {},
+                            onTap: () => {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ShowProductPage(
+                                        cate: _listCateModel[index]),
+                                  ))
+                            },
                             child: Container(
                               margin: const EdgeInsets.only(right: 24),
                               decoration: BoxDecoration(
@@ -210,7 +218,7 @@ class _HomePageState extends State<HomePage> {
             const SliverToBoxAdapter(
               child: Text(
                 "Nổi bật nhất",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
             SliverToBoxAdapter(
@@ -299,7 +307,8 @@ class _HomePageState extends State<HomePage> {
                                               },
                                               icon: const Icon(
                                                 Icons.discount,
-                                                color: Color.fromARGB(255, 197, 178, 8),
+                                                color: Color.fromARGB(
+                                                    255, 197, 178, 8),
                                               ))
                                         ],
                                       ),

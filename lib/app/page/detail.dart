@@ -82,20 +82,20 @@ class _DetailState extends State<Detail> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const SizedBox(height: 16),
-                              Text("NumberID: ${user.idNumber}",
+                              Text("ID: ${user.idNumber}",
                                   style: mystyle),
-                              Text("Fullname: ${user.fullName}",
+                              Text("Tên đầy đủ: ${user.fullName}",
                                   style: mystyle),
-                              Text("Phone Number: ${user.phoneNumber}",
+                              Text("Số điện thoại: ${user.phoneNumber}",
                                   style: mystyle),
-                              Text("Gender: ${user.gender}", style: mystyle),
-                              Text("Birth Day: ${user.birthDay}",
+                              Text("Giới tính: ${user.gender}", style: mystyle),
+                              Text("Ngày sinh: ${user.birthDay}",
                                   style: mystyle),
-                              Text("School Year: ${user.schoolYear}",
+                              Text("Năm học: ${user.schoolYear}",
                                   style: mystyle),
-                              Text("School Key: ${user.schoolKey}",
+                              Text("Khóa học: ${user.schoolKey}",
                                   style: mystyle),
-                              Text("Date Created: ${user.dateCreated}",
+                              Text("Ngày tạo: ${user.dateCreated}",
                                   style: mystyle),
                               const SizedBox(height: 16),
                             ],
@@ -128,28 +128,28 @@ class _DetailState extends State<Detail> {
                           ),
                         );
                       },
-                      child: const Text("Forget Password"),
+                      child: const Text("Quên mật khẩu"),
                     ),
-                    OutlinedButton(
-                      style: ButtonStyle(
-                        shape: WidgetStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                8), // Set the border radius to zero
-                          ),
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Listcatepage(),
-                          ),
-                        );
-                      },
-                      child: const Text("List Category"),
-                    ),
-                    OutlinedButton(
+                    // OutlinedButton(
+                    //   style: ButtonStyle(
+                    //     shape: WidgetStateProperty.all(
+                    //       RoundedRectangleBorder(
+                    //         borderRadius: BorderRadius.circular(
+                    //             8), // Set the border radius to zero
+                    //       ),
+                    //     ),
+                    //   ),
+                    //   onPressed: () {
+                    //     Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (context) => const Listcatepage(),
+                    //       ),
+                    //     );
+                    //   },
+                    //   child: const Text("List Category"),
+                    // ),
+                    ElevatedButton(
                       style: ButtonStyle(
                         shape: WidgetStateProperty.all(
                           RoundedRectangleBorder(
@@ -166,7 +166,7 @@ class _DetailState extends State<Detail> {
                           ),
                         );
                       },
-                      child: const Text("CRUD"),
+                      child: const Text("Chế độ quản trị viên"),
                     ),
                   ],
                 ),

@@ -76,7 +76,7 @@ class _MainpageState extends State<Mainpage> {
                       MaterialPageRoute(
                           builder: (context) => const FavoritePage()));
                 },
-                icon: const Icon(Icons.favorite))
+                icon: const Icon(Icons.favorite, color: Colors.pinkAccent,))
           ]),
       drawer: Drawer(
         child: IconTheme(
