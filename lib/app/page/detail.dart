@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:tuan08/app/page/forgetpassword.dart';
 import 'package:tuan08/app/page/listCatePage.dart';
 import 'package:tuan08/components/management.dart';
+import 'package:tuan08/components/update_infomation.dart';
 import '../model/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -66,15 +68,17 @@ class _DetailState extends State<Detail> {
                               borderRadius: BorderRadius.circular(50),
                               boxShadow: [
                                 BoxShadow(
-                                  color: const Color.fromARGB(255, 190, 190, 190)
-                                      .withOpacity(0.4),
+                                  color:
+                                      const Color.fromARGB(255, 190, 190, 190)
+                                          .withOpacity(0.4),
                                   spreadRadius: 2,
                                   blurRadius: 8,
                                 ),
                               ],
                             ),
                             child: CircleAvatar(
-                              backgroundImage: NetworkImage(user.imageURL!, scale: 1),
+                              backgroundImage:
+                                  NetworkImage(user.imageURL!, scale: 1),
                               radius: 60,
                             ),
                           ),
@@ -82,8 +86,7 @@ class _DetailState extends State<Detail> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const SizedBox(height: 16),
-                              Text("Number: ${user.idNumber}",
-                                  style: mystyle),
+                              Text("Number: ${user.idNumber}", style: mystyle),
                               Text("Tên đầy đủ: ${user.fullName}",
                                   style: mystyle),
                               Text("Số điện thoại: ${user.phoneNumber}",
@@ -100,7 +103,7 @@ class _DetailState extends State<Detail> {
                               const SizedBox(height: 16),
                             ],
                           )
-                        ], 
+                        ],
                       ),
                     ),
                   ),
@@ -108,7 +111,7 @@ class _DetailState extends State<Detail> {
                 const SizedBox(
                   height: 32,
                 ),
-                Row(
+                Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     FilledButton(
@@ -168,8 +171,29 @@ class _DetailState extends State<Detail> {
                       },
                       child: const Text("Chế độ quản trị viên"),
                     ),
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        shape: WidgetStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                8), // Set the border radius to zero
+                          ),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const UpdateInfomationPage(),
+                          ),
+                        );
+                      },
+                      child: const Text("Chỉnh sửa thông tin cá nhân"),
+                    ),
                   ],
                 ),
+                Container(
+                    child: Lottie.asset("assets/images/use_interface.json"))
               ],
             ),
           ),
