@@ -24,7 +24,7 @@ class _CategoryManagementState extends State<CategoryManagement> {
     return await APIRepository().getListCategory(accountID, token);
   }
 
-  void getCategoriesAll() async {
+  Future<void> getCategoriesAll() async {
     _listAllCategory = await getListCategory();
 
     for (var element in _listAllCategory) {
@@ -44,21 +44,18 @@ class _CategoryManagementState extends State<CategoryManagement> {
     String token = pref.getString("token")!;
     return await APIRepository().removeCategory(categoryID, accountID, token);
   }
-   @override
+
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-     getCategoriesAll();
+    getCategoriesAll();
   }
 
   @override
   void dispose() {
     super.dispose();
-     getCategoriesAll();
-
+    getCategoriesAll();
   }
-
-  
-  
 
   showAlertDialog(BuildContext context, CategoryModel cate) async {
     Widget cancelButton = TextButton(
@@ -169,15 +166,17 @@ class _CategoryManagementState extends State<CategoryManagement> {
                               Row(
                                 children: [
                                   IconButton(
-                                    onPressed: () {
-                                      Navigator.push(context, MaterialPageRoute(
+                                    onPressed: () async {
+                                      await Navigator.push(context,
+                                          MaterialPageRoute(
                                         builder: (context) {
                                           // print("cate desc: ${cate.desc}");
                                           return UpdateCategoryPage(
                                               cateModel: cate);
                                         },
                                       ));
-                                      
+                                      await getCategoriesAll();
+                                      setState(() {});
                                     },
                                     icon: const Icon(Icons.edit),
                                   ),
@@ -206,12 +205,14 @@ class _CategoryManagementState extends State<CategoryManagement> {
         ),
         floatingActionButton: FilledButton(
           style: const ButtonStyle(),
-          onPressed: () {
-            Navigator.push(
+          onPressed: () async {
+            await Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const AddCatePage(),
                 ));
+            await getCategoriesAll();
+            setState(() {});
           },
           child: const Icon(Icons.add),
         ));

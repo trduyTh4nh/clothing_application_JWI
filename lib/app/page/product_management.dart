@@ -159,14 +159,17 @@ class _ProductManagementState extends State<ProductManagement> {
                               Row(
                                 children: [
                                   IconButton(
-                                    onPressed: () {
-                                      Navigator.push(
+                                    onPressed: () async {
+                                      await Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
                                                 UpdateProductPage(
                                                     productModel: product),
                                           ));
+                                      setState(() {
+                                        getProductsAll();
+                                      });
                                     },
                                     icon: const Icon(Icons.edit),
                                   ),
@@ -192,14 +195,19 @@ class _ProductManagementState extends State<ProductManagement> {
           ],
         ),
         floatingActionButton: FilledButton(
-          style: ButtonStyle(
+          style: const ButtonStyle(
           ),
-          onPressed: () {
-            Navigator.push(
+          onPressed: () async {
+           await  Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const AddProductPage(),
                 ));
+
+              getProductsAll();
+            setState(() {
+              
+            });
           },
           child: const Icon(Icons.add),
         ));
