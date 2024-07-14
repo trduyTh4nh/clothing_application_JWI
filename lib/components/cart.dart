@@ -71,6 +71,7 @@ class _CartPageState extends State<CartPage> {
           snackAlert("Thanh toán thất bại!", context);
         }
 
+        value.delAll();
         setState(() {});
 
         Navigator.of(context).pop();
@@ -182,7 +183,9 @@ class _CartPageState extends State<CartPage> {
                 ),
                 ElevatedButton(
                     onPressed: () async {
-                      showAlertDialog(context, value);
+                        await showAlertDialog(context, value,);
+                        
+                      
                       // SharedPreferences pref =
                       //     await SharedPreferences.getInstance();
                       // String token = pref.getString("token")!;

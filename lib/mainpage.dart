@@ -12,6 +12,7 @@ import 'package:tuan08/components/favorite.dart';
 import 'package:tuan08/components/hisotry.dart';
 import 'package:tuan08/components/home.dart';
 import 'package:tuan08/components/management.dart';
+import 'package:tuan08/components/searchpage.dart';
 import 'package:tuan08/provider/add_provider.dart';
 import 'app/data/sharepre.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -35,11 +36,14 @@ class _MainpageState extends State<Mainpage> {
     setState(() {});
   }
 
+  bool isSearch = true;
   @override
   void initState() {
     super.initState();
     getDataUser();
     print(user.imageURL);
+
+    isSearch = true;
   }
 
   List<Widget> _pages = [HomePage(), HisotryPage(), CartPage(), Detail()];
@@ -52,12 +56,22 @@ class _MainpageState extends State<Mainpage> {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController search = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
           iconTheme: const IconThemeData(color: Colors.black),
           backgroundColor: Colors.white,
-          title: Image.asset('assets/images/just-wear-it-favicon-black.png'),
+          title: Image.asset(
+                  'assets/images/just-wear-it-favicon-black.png',
+                  scale: 1.5,
+                ),
           actions: [
+            IconButton(onPressed: () {
+              setState(() {
+                Navigator.push(context, MaterialPageRoute(builder:(context) => const Searchpage()));
+              });
+            }, icon: const Icon(Icons.search)),
             Consumer<ProductProvider>(
               builder: (context, value, child) {
                 return Badge(
@@ -89,7 +103,7 @@ class _MainpageState extends State<Mainpage> {
                 width: 50,
                 height: 50,
               ),
-            )
+            ),
           ]),
       drawer: Drawer(
         child: IconTheme(

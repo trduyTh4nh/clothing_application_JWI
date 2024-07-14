@@ -23,10 +23,15 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<String> _imagesSlider = [
-    "https://balenciaga.dam.kering.com/m/5f3f4c17a902bb5a/Large-HP_DK_INSTITUTIONAL_BAG_CAMPAIGN__06_2600x1300_2x1.jpg",
-    "https://balenciaga.dam.kering.com/m/66f90ad0be7bde0/Large-HP_DK_VOGUE_WORLD_LOOK_2600x1300_2x1.jpg",
-    "https://balenciaga.dam.kering.com/m/5b56fc63213014a1/Large-HP_DK_INSTITUTIONAL_BAG_CAMPAIGN_RODEO_04_2600x1300_2x1.jpg",
-    "https://balenciaga.dam.kering.com/m/6e6c09ddb1b44574/Large-HP_DK_INSTITUTIONAL_BAG_CAMPAIGN_HOURGLASS_01_2600x1300_2x1.jpg"
+    // "https://balenciaga.dam.kering.com/m/5f3f4c17a902bb5a/Large-HP_DK_INSTITUTIONAL_BAG_CAMPAIGN__06_2600x1300_2x1.jpg",
+    // "https://balenciaga.dam.kering.com/m/66f90ad0be7bde0/Large-HP_DK_VOGUE_WORLD_LOOK_2600x1300_2x1.jpg",
+    // "https://balenciaga.dam.kering.com/m/5b56fc63213014a1/Large-HP_DK_INSTITUTIONAL_BAG_CAMPAIGN_RODEO_04_2600x1300_2x1.jpg",
+    // "https://balenciaga.dam.kering.com/m/6e6c09ddb1b44574/Large-HP_DK_INSTITUTIONAL_BAG_CAMPAIGN_HOURGLASS_01_2600x1300_2x1.jpg",
+    "https://blog.thejacketmaker.com/wp-content/uploads/2021/07/street-style-feature-930x620.jpg",
+    "https://assets.vogue.com/photos/60d4f0e5f672b4dae269baae/4:3/pass/Paris%252520Mens%252520SS22%252520day%2525203%252520by%252520STYLEDUMONDE%252520Street%252520Style%252520Fashion%252520Photography_95A5761FullRes.jpg",
+    "https://www.boredpanda.com/blog/wp-content/uploads/2023/05/style-tips-cover_800.jpg",
+    "https://audaces.com/wp-content/uploads/2020/08/fashion-styles.webp",
+    "https://st-media-template.antsomi.com/upload/2024/06/12/47cace34-73e6-4859-8f12-7447f95c7336.jpg"
   ];
 
   List<CategoryModel> _listCateModel = [];
@@ -55,9 +60,6 @@ class _HomePageState extends State<HomePage> {
 
   void getAllListCate() async {
     _listCateModel = await getListCategory();
-    // for (var element in _listCateModel) {
-    //   print(element.name);
-    // }
   }
 
   bool checkfavorite = false;
@@ -77,51 +79,7 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
         child: CustomScrollView(
           slivers: [
-            const SliverToBoxAdapter(
-              child: Text(
-                "Dám khác biệt?",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-            ),
-            const SliverToBoxAdapter(
-              child: SizedBox(
-                height: 16,
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: CarouselSlider(
-                items: _imagesSlider
-                    .map((item) => Container(
-                          child: Container(
-                            decoration: const BoxDecoration(),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(
-                                  12.0), // Set your desired border radius here
-                              child: Image.network(
-                                item,
-                                fit: BoxFit
-                                    .cover, // Adjust the image fit property as needed
-                                width: 1000.0,
-                              ),
-                            ),
-                          ),
-                        ))
-                    .toList(),
-                options: CarouselOptions(
-                  autoPlay: true,
-                  enlargeCenterPage: true,
-                  aspectRatio: 2,
-                  onPageChanged: (index, reason) {
-                    // Handle page change if needed
-                  },
-                ),
-              ),
-            ),
-            const SliverToBoxAdapter(
-              child: SizedBox(
-                height: 16,
-              ),
-            ),
+          
             const SliverToBoxAdapter(
               child: Text(
                 "Xu hướng hiện tại",
@@ -217,8 +175,53 @@ class _HomePageState extends State<HomePage> {
             ),
             const SliverToBoxAdapter(
               child: Text(
+                "Dám khác biệt?",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+            ),
+            const SliverToBoxAdapter(
+              child: SizedBox(
+                height: 16,
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: CarouselSlider(
+                items: _imagesSlider
+                    .map((item) => Container(
+                          child: Container(
+                            decoration: const BoxDecoration(),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(
+                                  12.0), // Set your desired border radius here
+                              child: Image.network(
+                                item,
+                                fit: BoxFit
+                                    .cover, // Adjust the image fit property as needed
+                                width: 1000.0,
+                              ),
+                            ),
+                          ),
+                        ))
+                    .toList(),
+                options: CarouselOptions(
+                  autoPlay: true,
+                  enlargeCenterPage: true,
+                  aspectRatio: 2,
+                  onPageChanged: (index, reason) {
+                    // Handle page change if needed
+                  },
+                ),
+              ),
+            ),
+            const SliverToBoxAdapter(
+              child: SizedBox(
+                height: 16,
+              ),
+            ),
+            const SliverToBoxAdapter(
+              child: Text(
                 "Nổi bật nhất",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
             SliverToBoxAdapter(
@@ -243,9 +246,9 @@ class _HomePageState extends State<HomePage> {
 
                   List<ProductModel> _listProduct = snapshot.data!;
                   return Padding(
-                      padding: const EdgeInsets.only(bottom: 40, top: 8),
+                      padding: const EdgeInsets.only(bottom: 30, top: 8),
                       child: SizedBox(
-                        height: 500,
+                        height: 650,
                         child: MasonryGridView.builder(
                           mainAxisSpacing: 10,
                           crossAxisSpacing: 10,
@@ -327,7 +330,7 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
-             SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -335,11 +338,22 @@ class _HomePageState extends State<HomePage> {
                     "Thời trang cuộc sống",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                   const SizedBox(height: 16,),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Container(
+                      child: Image.network(
+                          "https://st-media-template.antsomi.com/upload/2024/06/12/47cace34-73e6-4859-8f12-7447f95c7336.jpg"))
                 ],
               ),
+              
             ),
-            
+              SliverToBoxAdapter(
+                child: Container(
+                  
+                  child: Image.asset(
+                      'assets/images/just-wear-it-high-resolution.png', height: 100, scale: 1.5,),
+                )),
             SliverToBoxAdapter(
               child: Footer(),
             )
