@@ -74,8 +74,8 @@ class _FavoritePageState extends State<FavoritePage> {
                                     children: [
                                       Container(
                                         child: Text(product.name!),
-                                        width: 250,
-                                        ),
+                                        width: 220,
+                                      ),
                                       const SizedBox(height: 4),
                                       Text(formatMoney(product.price!)),
                                     ],
@@ -85,11 +85,14 @@ class _FavoritePageState extends State<FavoritePage> {
                               Row(
                                 children: [
                                   IconButton(
+                                      onPressed: () {
+                                        
+                                      },
+                                      icon: const Icon(Icons.add_shopping_cart_sharp)),
+                                  IconButton(
                                     onPressed: () {
                                       removeProductFavorite(product.id!);
-                                      setState(() {
-                                        
-                                      });
+                                      setState(() {});
                                     },
                                     icon: const Icon(Icons.delete),
                                   ),

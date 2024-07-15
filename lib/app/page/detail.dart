@@ -112,16 +112,19 @@ class _DetailState extends State<Detail> {
                   height: 32,
                 ),
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  
                   children: [
-                    FilledButton(
+                    FilledButton.icon(
+                      icon: const Icon(Icons.key),
+                      label: const Text("Quên mật khẩu"),
                       style: ButtonStyle(
                         shape: WidgetStateProperty.all(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
-                                8), // Set the border radius to zero
+                                8), 
                           ),
                         ),
+                        
                       ),
                       onPressed: () {
                         Navigator.push(
@@ -131,7 +134,7 @@ class _DetailState extends State<Detail> {
                           ),
                         );
                       },
-                      child: const Text("Quên mật khẩu"),
+                      
                     ),
                     // OutlinedButton(
                     //   style: ButtonStyle(
@@ -152,7 +155,9 @@ class _DetailState extends State<Detail> {
                     //   },
                     //   child: const Text("List Category"),
                     // ),
-                    ElevatedButton(
+                    ElevatedButton.icon(
+                      icon: const Icon(Icons.shield_moon_outlined),
+                      label: const Text("Chế độ quản trị viên"),
                       style: ButtonStyle(
                         shape: WidgetStateProperty.all(
                           RoundedRectangleBorder(
@@ -169,9 +174,11 @@ class _DetailState extends State<Detail> {
                           ),
                         );
                       },
-                      child: const Text("Chế độ quản trị viên"),
+                 
                     ),
-                    ElevatedButton(
+                    ElevatedButton.icon(
+                      icon: const Icon(Icons.person_pin),
+                      label: const Text('Chỉnh sửa thông tin'),
                       style: ButtonStyle(
                         shape: WidgetStateProperty.all(
                           RoundedRectangleBorder(
@@ -188,7 +195,6 @@ class _DetailState extends State<Detail> {
                           ),
                         );
                       },
-                      child: const Text("Chỉnh sửa thông tin cá nhân"),
                     ),
                   ],
                 ),

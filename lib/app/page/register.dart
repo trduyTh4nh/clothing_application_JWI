@@ -61,7 +61,7 @@ class _RegisterState extends State<Register> {
                     style: TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
-                        color: Colors.blue),
+                       ),
                   ),
                 ),
                 signUpWidget(),
@@ -70,7 +70,7 @@ class _RegisterState extends State<Register> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Expanded(
-                      child: OutlinedButton(
+                      child: ElevatedButton(
                         onPressed: () async {
                           String respone = await register();
                           if (respone == "ok") {

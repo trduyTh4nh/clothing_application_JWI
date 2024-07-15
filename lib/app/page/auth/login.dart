@@ -111,10 +111,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   Container(
                     child: Lottie.asset('assets/images/Store.json'),
                   ),
-                  const Text("JUST WEAR IT", style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 32
-                  ),),
+                  Container(
+                    child: Image.asset(
+                      'assets/images/just-wear-it-high-resolution.png',
+                      scale: 1,
+                    ),
+                  )
                 ],
               ),
             ),
